@@ -28,6 +28,8 @@
   Syntax highlighting - defaults to atom light theme.
   List here: https://github.com/isagalaev/highlight.js/tree/master/src/styles
   -->
-  <link rel="stylesheet" href="{{ "/libs/highlight.js/9.15.6/atom-one-light.css" | relURL }}" />
-  <script src="{{ "/libs/highlight.js/9.15.6/highlight.pack.js" | relURL }}"></script>
+  {{ $hljsCSS := resources.Get "/highlight.js/9.15.6/atom-one-light.css" | minify | fingerprint -}}
+  {{ $hljsJS := resources.Get "/highlight.js/9.15.6/highlight.pack.js" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $hljsCSS.Permalink }}" integrity="{{ $hljsCSS.Data.Integrity }}" />
+  <script src="{{ $hljsJS.Permalink }}" integrity="{{ $hljsJS.Data.Integrity }}"></script>
   <script>hljs.initHighlightingOnLoad();</script>
