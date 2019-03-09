@@ -7,9 +7,9 @@
     {{ $styleCSS := resources.Get "/css/style.css" -}}
     {{ $fontCSS := resources.Get "/css/fonts.css" -}}
     {{ $bundledCSS := slice $styleCSS $fontCSS | resources.Concat "/css/bundled.css" | minify | fingerprint -}}
-    <link rel="stylesheet" href="{{ $bundledCSS.Permalink }}" integrity="{{ $bundledCSS.Data.Integrity }}" />
+    <link rel="stylesheet" href="{{ $bundledCSS.RelPermalink }}" integrity="{{ $bundledCSS.Data.Integrity }}" />
     {{ range .Site.Params.custom_css -}}
-    <link rel="stylesheet" href="{{ . | absURL }}" />
+    <link rel="stylesheet" href="{{ . | relURL }}" />
     {{- end }}
     {{ partial "head_custom.html" . }}
   </head>
